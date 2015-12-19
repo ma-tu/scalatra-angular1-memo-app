@@ -1,0 +1,16 @@
+<div id="main_container" ng-controller="noteController" ng-init="initialize()" >
+    <div id="side_container">
+        <table class="table table-hover">
+            <tbody>
+            <tr ng-repeat="note in noteList()" ng-class="{active: isSelectedRow($index)}">
+                <td ng-click="onTitleListClick($index)">{{note.title}}
+                    <button type="button" class="btn btn-default btn-xs float_right"  ng-show="isSelectedRow($index)" ng-click="onEditNoteInfo()"><span class="glyphicon glyphicon-info-sign"></span></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="editor_container">
+        <textarea id="editor_text" class="form-control" ng-model="noteText" ng-change="onTextChange()"></textarea>
+    </div>
+</div>

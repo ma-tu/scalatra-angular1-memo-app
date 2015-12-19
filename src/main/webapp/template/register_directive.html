@@ -1,0 +1,36 @@
+<div ng-controller="registerController" ng-init="initialize()">
+  <div class="panel panel-default" ng-show="showRegisterForm">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-user"></span> アカウント登録
+    </div>
+    <div class="panel-body">
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="inputAccount" class="col-sm-4 control-label">アカウント</label>
+          <div class="col-sm-8">
+            <input type="text" ng-model="account" focus-directive="accountFocus" class="form-control" id="inputAccount" placeholder="アカウント" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword" class="col-sm-4 control-label">パスワード</label>
+          <div class="col-sm-8">
+            <input type="password" ng-model="password" class="form-control" id="inputPassword" placeholder="パスワード" required>
+          </div>
+        </div>
+        <div class="form-group warning" ng-show="(errorMsg.length > 0)">
+          <small class="col-sm-offset-1 text-warning">{{errorMsg}}</small>
+        </div>
+        <div class="form-group last">
+          <div class="col-sm-offset-4 col-sm-8">
+            <button type="button" class="btn btn-info btn-sm" ng-click="register()">
+              アカウント登録
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="panel-footer">
+      <a href="" ng-click="onGoToLogin()">戻る</a>
+    </div>
+  </div>
+</div>

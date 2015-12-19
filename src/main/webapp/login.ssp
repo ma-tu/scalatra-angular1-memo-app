@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BlackNote</title>
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!--http://bootswatch.com/darkly/-->
+    <link rel="stylesheet" type="text/css" href="css/login.css">
+  </head>
+  <body ng-app="App">
+    <div class="container">
+      <div class="row">
+        <div style="position:absolute; top:50px; right:100px;">
+          <login-directive></login-directive>
+          <register-directive></register-directive>
+        </div>
+      </div>
+    </div>
+    <script src="bootstrap/js/jquery-1.11.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="angular/angular.min.js"></script>
+    <script src="angular/ui-bootstrap-tpls-0.11.2.min.js"></script>
+    <script>
+      var appModule = angular.module('App', ['ui.bootstrap']);
+    </script>
+    <script src="js/util/constants.js"></script>
+    <script src="js/util/focusDirective.js"></script>
+    <script src="js/login/loginController.js"></script>
+    <script src="js/login/loginDirective.js"></script>
+    <script src="js/login/registerController.js"></script>
+    <script src="js/login/registerDirective.js"></script>
+    <script src="js/login/loginHttpService.js"></script>
+  </body>
+</html>

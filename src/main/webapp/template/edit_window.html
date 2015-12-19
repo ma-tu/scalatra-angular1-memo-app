@@ -1,0 +1,23 @@
+<!-- Modal for newGuestForm -->
+<div>
+    <form class="form-horizontal" role="form" ng-submit="ok()">
+        <div class="form-group"/>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">{{inputLabel}}</label>
+            <div class="col-sm-9">
+                <input class="form-control input-sm" type="text" ng-model="inputVal" focus-directive="inputFocus" placeholder="{{inputLabel}}"/>
+            </div>
+        </div>
+        <div class="form-group" ng-hide="(alertMsgModel.length==0)">
+            <div class="col-sm-offset-1 text-warning">{{alertMsgModel}}</div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-7">
+                <button type="button" class="btn btn-default btn-sm" ng-click="ok()">OK</button>
+            </div>
+            <div class="col-sm-3">
+                <button type="button" class="btn btn-default btn-sm" ng-click="cancel()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

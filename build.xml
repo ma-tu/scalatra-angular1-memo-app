@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    <condition property="mac" value="true">
+        <os family="mac" />
+    </condition>
+    <condition property="windows" value="true">
+        <os family="windows" />
+    </condition>
+
+    <target name="setPropertiesForMac" if="mac">
+        <property name="tomcat-mnote-path" value="/develop/tomcat-mproject-mnote"/>
+        <property name="develop-mnote-path" value="/develop/git/mproject/mnote"/>
+        <property name="startupCmd" value="./startup.sh"/>
+        <property name="shutdownCmd" value="./shutdown.sh"/>
+    </target>
+    <target name="setPropertiesForWin" if="win">
+        <property name="tomcat-mnote-path" value="hogehoge"/>
+        <property name="develop-mnote-path" value="hogehoge"/>
+        <property name="startupCmd" value="./startup.bat"/>
+        <property name="shutdownCmd" value="./shutdown.bat"/>
+    </target>
+    <target name="setProperties" depends="setPropertiesForMac,setPropertiesForWin"/>
+
+    <target name="callByMaven">
+        <antcall target="copyWarAndRestart"/>
+    </target>
+
+
+    <target name="copyWarAndRestart">
+        <antcall target="shutdownMnote" />
+        <antcall target="copyMNoteWar"/>
+        <antcall target="startMnote"/>
+    </target>
+
+    <target name="startMnote" depends="setProperties">
+        <exec dir="${tomcat-mnote-path}/bin/"
+              executable="${startupCmd}"
+              output="${tomcat-mnote-path}/logs/terminal.log"
+              append="true"/>
+    </target>
+
+    <target name="shutdownMnote" depends="setProperties">
+        <exec dir="${tomcat-mnote-path}/bin/"
+              executable="${shutdownCmd}"
+              output="${tomcat-mnote-path}/logs/terminal.log"
+              append="true"/>
+    </target>
+
+    <target name="copyWebAppRestart">
+        <antcall target="shutdownMnote" />
+        <antcall target="copyWebApp"/>
+        <antcall target="startMnote"/>
+    </target>
+
+    <target name="copyWebApp" depends="setProperties">
+        <delete dir="${tomcat-mnote-path}/webapps/mnote/angular"/>
+        <delete dir="${tomcat-mnote-path}/webapps/mnote/bootstrap"/>
+        <delete dir="${tomcat-mnote-path}/webapps/mnote/css"/>
+        <delete dir="${tomcat-mnote-path}/webapps/mnote/js"/>
+        <delete dir="${tomcat-mnote-path}/webapps/mnote/template"/>
+        <delete file="${tomcat-mnote-path}/webapps/mnote/main.ssp"/>
+        <delete file="${tomcat-mnote-path}/webapps/mnote/login.ssp"/>
+
+        <copy todir="${tomcat-mnote-path}/webapps/mnote/angular" >
+            <fileset dir="${develop-mnote-path}/src/main/webapp/angular"/>
+        </copy>
+        <copy todir="${tomcat-mnote-path}/webapps/mnote/bootstrap" >
+            <fileset dir="${develop-mnote-path}/src/main/webapp/bootstrap"/>
+        </copy>
+        <copy todir="${tomcat-mnote-path}/webapps/mnote/css" >
+            <fileset dir="${develop-mnote-path}/src/main/webapp/css"/>
+        </copy>
+        <copy todir="${tomcat-mnote-path}/webapps/mnote/js" >
+            <fileset dir="${develop-mnote-path}/src/main/webapp/js"/>
+        </copy>
+        <copy todir="${tomcat-mnote-path}/webapps/mnote/template" >
+            <fileset dir="${develop-mnote-path}/src/main/webapp/template"/>
+        </copy>
+        <copy tofile="${tomcat-mnote-path}/webapps/mnote/main.ssp" file="${develop-mnote-path}/src/main/webapp/main.ssp"/>
+        <copy tofile="${tomcat-mnote-path}/webapps/mnote/login.ssp" file="${develop-mnote-path}/src/main/webapp/login.ssp"/>
+    </target>
+
+    <target name="copyConfig" depends="setProperties">
+        <delete dir="${tomcat-mnote-path}/conf/mnote.properties"/>
+        <copy file="${develop-mnote-path}/src/main/conf/mnote.properties" tofile="${tomcat-mnote-path}/conf/mnote.properties"/>
+    </target>
+
+    <target name="copyMNoteWar" depends="setProperties">
+        <delete dir="${tomcat-mnote-path}/webapps/mnote"/>
+        <delete file="${tomcat-mnote-path}/webapps/mnote.war"/>
+        <delete>
+            <fileset dir="${tomcat-mnote-path}/logs" includes = "*"/>
+        </delete>
+        <copy file="${develop-mnote-path}/target/mnote-1.0-SNAPSHOT.war" tofile="${tomcat-mnote-path}/webapps/mnote.war"/>
+    </target>
+
+
+</project>

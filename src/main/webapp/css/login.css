@@ -1,0 +1,30 @@
+body {
+    background: url("../img/login.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.panel-default {
+    opacity: 0.9;
+    margin-top:30px;
+}
+.panel-body {
+    height: 230px
+}
+.form-group {
+    margin-top:10px;
+    margin-bottom:10px;
+}
+.form-group.warning {
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.form-group.last {
+    margin-bottom:0px;
+}
+.form-group.checkbox {
+    margin-top:0px;
+    margin-bottom:5px;
+}

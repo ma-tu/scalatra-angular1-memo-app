@@ -1,0 +1,17 @@
+<header id="header_container" ng-controller="headerController">
+  <div class="col-xs-10">
+    <btn-with-icon-directive glyph-icon="glyphicon-plus" click-func="onAddNote()"></btn-with-icon-directive>
+    <btn-with-icon-directive glyph-icon="glyphicon-trash" click-func="onDeleteNote()"></btn-with-icon-directive>
+  </div>
+  <div class="col-xs-2">
+    <div class="float_right">
+      {{user}}
+      <btn-with-icon-directive data-toggle="dropdown" glyph-icon="glyphicon-user" click-func=""></btn-with-icon-directive>
+      <ul class="dropdown-menu" role="menu">
+        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="onPasswordChange()">パスワード変更</a></li>
+        <li role="presentation" class="divider" tabindex="-1" ></li>
+        <li role="presentation"><a role="menuitem" tabindex="-1" ng-click="onLogout()">ログアウト</a></li>
+      </ul>
+    </div>
+  </div>
+</header>
